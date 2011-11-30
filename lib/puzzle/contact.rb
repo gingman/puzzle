@@ -43,6 +43,14 @@ module Puzzle
       @owned_type = contact_info["ownedType"]
     end
 
+    # Return a list of contacts
+    # => pageSize: The attribute specifies the maximum number of records to be returned in a request. The system limit and default value is 500.
+    # => firstname: firstname of the contact to be searched
+    # => lastname: last (or family) name of the contact to be searched
+    # => levels: employee rank (e.g. VP, Staff)
+    # => companyName: company for whom contact works (indexed to include Company Name, URL, and ticker symbol)
+    # => email: full email address of the contact to be searched
+    # => View http://developer.jigsaw.com/documentation/search_and_get_api_guide/6_Data_Keys_and_Values for available search parameter
     def self.find(options)
       contacts = []
       result = Puzzle::Request.get("/searchContact", options)

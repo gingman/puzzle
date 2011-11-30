@@ -1,3 +1,6 @@
+require File.join(File.dirname(__FILE__), 'exception')
+require File.join(File.dirname(__FILE__), 'error')
+require File.join(File.dirname(__FILE__), 'const')
 require "json"
 require "cgi"
 require "net/http"
@@ -30,8 +33,7 @@ module Puzzle
           # TODO: Support XML format  
         end
       else
-        # TODO: Handle Errors
-        false
+        handle_error(response.body, format)
       end
     end
 
@@ -54,6 +56,57 @@ module Puzzle
       }.collect { |key, value|
         "#{CGI.escape(key.to_s).gsub(/%(5B|5D)/n) { [$1].pack("H*") }}=#{CGI.escape(value.to_s)}"
       }.join("&")
+    end
+
+    def self.handle_error(error_body, format = "json")
+      error = parse_error(error_body, format)
+      case error.http_status_code
+      when 400
+        raise Puzzle::Exception::ParamError, error.message
+      when 403
+        case error.code
+        when Puzzle::ErrorCode::LOGIN_FAIL
+          raise Puzzle::Exception::LoginFail, error.message
+        when Puzzle::ErrorCode::TOKEN_FAIL
+          raise Puzzle::Exception::TokenFail, error.message
+        end
+      when 404
+        raise Puzzle::Exception::ContactNotExist, error.message
+      when 405
+        case error.code
+        when Puzzle::ErrorCode::CONTACT_NOT_OWNED
+          raise Puzzle::Exception::ContactNotOwned, error.message
+        when Puzzle::ErrorCode::PURCHASE_LOW_POINTS
+          raise Puzzle::Exception::PurchaseLowPoints, error.message
+        end
+      when 500
+        case error.code
+        when Puzzle::ErrorCode::SEARCH_ERROR
+          raise Puzzle::Exception::SearchError, error.message
+        when Puzzle::ErrorCode::SYS_ERROR
+          raise Puzzle::Exception::SysError, error.message
+        end
+      when 501
+        raise Puzzle::Exception::NotImplemented, error.message
+      when 503
+        raise Puzzle::Exception::NotAvailable, error.message
+      else
+        raise StandardError, "Unknown Error"
+      end
+    end
+
+    def self.parse_error(error_data, format = "json")
+      error = nil
+      case format
+      when "json"
+        parsed_error = JSON.parse(error_data)
+        if parsed_error && parsed_error.length > 0
+          error = Error.new(parsed_error[0])
+        end
+      when "xml"
+        # TODO: Add xml support
+      end
+      error
     end
   end
 end
