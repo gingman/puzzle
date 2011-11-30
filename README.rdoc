@@ -3,6 +3,37 @@
 Puzzle is an easy to use wrapper around the jigsaw API
 (http://www.jigsaw.com)
 
+== Usage
+
+Setup the gem
+
+    require "puzzle"
+
+    Puzzle.configure do |configuration|
+      configuration.token = "yourdevelopertoken"
+    end
+
+Search contacts
+
+    contacts =  Puzzle::Contact.find({
+      :firstname => "Aaron"
+    })
+
+    contacts.each do |contact|
+      p contact.firstname + " " + contact.lastname
+    end 
+
+Search companies
+
+    companies =  Puzzle::companies.find({
+      :firstname => "Aaron"
+    })
+
+    companies.each do |company|
+      p company.name
+    end 
+
+
 == Contributing to puzzle
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
