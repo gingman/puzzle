@@ -1,5 +1,5 @@
 # Load required files
-%w(configuration request company).each do |file|
+%w(configuration request company contact).each do |file|
   require File.join(File.dirname(__FILE__), 'puzzle', file)
 end
 
