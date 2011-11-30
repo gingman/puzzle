@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "puzzle"
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Simon Gingras"]
@@ -26,7 +26,10 @@ Gem::Specification.new do |s|
     "lib/puzzle.rb",
     "lib/puzzle/company.rb",
     "lib/puzzle/configuration.rb",
+    "lib/puzzle/const.rb",
     "lib/puzzle/contact.rb",
+    "lib/puzzle/error.rb",
+    "lib/puzzle/exception.rb",
     "lib/puzzle/request.rb",
     "puzzle.gemspec",
     "test/helper.rb",
