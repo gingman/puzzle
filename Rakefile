@@ -19,7 +19,7 @@ Jeweler::Tasks.new do |gem|
   gem.license = "MIT"
   gem.summary = %Q{Jigsaw API wrapper for ruby}
   gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "sgingras@wantedtech.com"
+  gem.email = "thegingman@gmail.com"
   gem.authors = ["Simon Gingras"]
   # dependencies defined in Gemfile
 end

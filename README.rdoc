@@ -1,6 +1,7 @@
-= puzzle
+= Puzzle
 
-Description goes here.
+Puzzle is an easy to use wrapper around the jigsaw API
+(http://www.jigsaw.com)
 
 == Contributing to puzzle
  
