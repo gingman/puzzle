@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/gingman/puzzle"
   gem.license = "MIT"
   gem.summary = %Q{Jigsaw API wrapper for ruby}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.description = %Q{Puzzle makes it easy to acces the jigsaw REST api}
   gem.email = "thegingman@gmail.com"
   gem.authors = ["Simon Gingras"]
   # dependencies defined in Gemfile
