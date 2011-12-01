@@ -34,7 +34,7 @@ module Puzzle
       @state = contact_info["state"]
       @country = contact_info["country"]
       @zip = contact_info["zip"]
-      @url = contact_info["contactUrl"]
+      @url = contact_info["contactURL"]
       @area_code = contact_info["areaCode"]
       @phone = contact_info["phone"]
       @email = contact_info["email"]
