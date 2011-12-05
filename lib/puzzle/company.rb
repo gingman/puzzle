@@ -19,11 +19,15 @@ module Puzzle
     # => View http://developer.jigsaw.com/documentation/search_and_get_api_guide/6_Data_Keys_and_Values for available search parameter
     def self.find(options)
       companies = []
+      results = {}
       result = Puzzle::Request.get("/searchCompany", options)
       result["companies"].each do |company|
         companies << new(company)
       end
-      companies
+      results = {
+        :total => result["totalHits"],
+        :companies => companies
+      }
     end
   end
 end

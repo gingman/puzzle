@@ -53,11 +53,15 @@ module Puzzle
     # => View http://developer.jigsaw.com/documentation/search_and_get_api_guide/6_Data_Keys_and_Values for available search parameter
     def self.find(options)
       contacts = []
+      results = {}
       result = Puzzle::Request.get("/searchContact", options)
       result["contacts"].each do |contact|
         contacts << new(contact)
       end
-      contacts
+      results = {
+        :total => result["totalHits"],
+        :contacts => contacts
+      }
     end
   end
 end
