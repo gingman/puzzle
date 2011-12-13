@@ -39,13 +39,16 @@ module Puzzle
 
     def self.request
       http = Net::HTTP.new(Puzzle.configuration.host, Puzzle.configuration.port)
+      http.verify_mode = Puzzle.configuration.verify_mode
+      http.ca_path = Puzzle.configuration.ca_path
+      http.ca_file = Puzzle.configuration.ca_file
       http.use_ssl = true
       http
     end
 
     def self.uri(path, options = {})
       format = Puzzle.configuration.format
-      "/rest/#{path}.#{format}?#{hash_to_query_string(options)}"
+      "/rest#{path}.#{format}?#{hash_to_query_string(options)}"
     end
 
     def self.hash_to_query_string(hash)
