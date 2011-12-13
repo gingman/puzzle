@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "puzzle"
-  s.version = "0.2.2"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Simon Gingras"]
-  s.date = "2011-12-05"
+  s.date = "2011-12-13"
   s.description = "Puzzle makes it easy to acces the jigsaw REST api"
   s.email = "thegingman@gmail.com"
   s.extra_rdoc_files = [
